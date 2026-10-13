@@ -11,10 +11,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".NouaActivitate"
-            android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +22,8 @@
             android:name=".ActivitateRezultat"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ActivityNoua"
+            android:exported="false"/>
     </application>
 
 </manifest>
