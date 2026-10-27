@@ -1,70 +1,58 @@
 package com.example.sem4_tema;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RatingBar;
-import android.widget.Spinner;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
 
 public class ActivityNoua extends AppCompatActivity {
 
-    private EditText etCreator;
-    private Spinner spCategory;
+    private EditText etCreatorName;
+    private EditText etCategory;
+    private EditText etTargetAudience;
     private CheckBox cbMonetized;
-    private RadioGroup rgAudience;
+    private CheckBox cbPublic;
     private RatingBar rbRating;
-    private SwitchCompat swPublic;
     private Button btnSave;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noua);
 
-        etCreator = findViewById(R.id.etCreator);
-        spCategory = findViewById(R.id.spCategory);
+        etCreatorName = findViewById(R.id.etCreatorName);
+        etCategory = findViewById(R.id.etCategory);
+        etTargetAudience = findViewById(R.id.etTargetAudience);
         cbMonetized = findViewById(R.id.cbMonetized);
-        rgAudience = findViewById(R.id.rgAudience);
+        cbPublic = findViewById(R.id.cbPublic);
         rbRating = findViewById(R.id.rbRating);
-        swPublic = findViewById(R.id.swPublic);
-        btnSave = findViewById(R.id.btnSaveTikTok);
-
-        String[] categorii = {"Gaming", "Comedy", "Education", "Vlog", "Tech"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categorii);
-        spCategory.setAdapter(adapter);
+        btnSave = findViewById(R.id.btnSave);
 
         btnSave.setOnClickListener(v -> {
-            String creator = etCreator.getText().toString().trim();
-            if (creator.isEmpty()) {
-                creator = "Anonim";
-            }
-            String category = spCategory.getSelectedItem().toString();
+            String creatorName = etCreatorName.getText().toString().trim();
+            String category = etCategory.getText().toString().trim();
+            String targetAudience = etTargetAudience.getText().toString().trim();
             boolean isMonetized = cbMonetized.isChecked();
-
-            int selectedRadioId = rgAudience.getCheckedRadioButtonId();
-            RadioButton selectedRb = findViewById(selectedRadioId);
-            String audience = selectedRb != null ? selectedRb.getText().toString() : "General";
-
+            boolean isPublic = cbPublic.isChecked();
             float rating = rbRating.getRating();
-            boolean isPublic = swPublic.isChecked();
 
-            TikTok tikTokItem = new TikTok(creator, category, isMonetized, audience, rating, isPublic);
+            if (creatorName.isEmpty() || category.isEmpty() || targetAudience.isEmpty()) {
+                Toast.makeText(ActivityNoua.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
+            TikTok newTikTok = new TikTok(creatorName, category, isMonetized, targetAudience, rating, isPublic);
 
             Intent resultIntent = new Intent();
-            Bundle bundle = new Bundle();
-            bundle.putParcelable("TIKTOK_OBJECT", tikTokItem);
-            resultIntent.putExtras(bundle);
+            resultIntent.putExtra("NEW_TIKTOK", newTikTok);
 
-            setResult(Activity.RESULT_OK, resultIntent);
+            setResult(RESULT_OK, resultIntent);
             finish();
         });
     }

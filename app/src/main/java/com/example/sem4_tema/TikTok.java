@@ -11,6 +11,7 @@ public class TikTok implements Parcelable {
     private float rating;
     private boolean isPublic;
 
+
     public TikTok(String creatorName, String category, boolean isMonetized, String targetAudience, float rating, boolean isPublic) {
         this.creatorName = creatorName;
         this.category = category;

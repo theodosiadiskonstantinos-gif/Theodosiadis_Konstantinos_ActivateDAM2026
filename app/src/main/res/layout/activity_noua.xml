@@ -1,111 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/etCreatorName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:hint="Creator Name" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adaugare Video TikTok"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="16dp" />
+    <EditText
+        android:id="@+id/etCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Category" />
 
+    <EditText
+        android:id="@+id/etTargetAudience"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Target Audience" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nume Creator:" />
+    <CheckBox
+        android:id="@+id/cbMonetized"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Is Monetized?" />
 
-        <EditText
-            android:id="@+id/etCreator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="ex. JohnDoe"
-            android:inputType="textPersonName"
-            android:layout_marginBottom="12dp" />
+    <CheckBox
+        android:id="@+id/cbPublic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Is Public?" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Categorie:" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Rating:" />
 
-        <Spinner
-            android:id="@+id/spCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp" />
+    <RatingBar
+        android:id="@+id/rbRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5" />
 
-        <CheckBox
-            android:id="@+id/cbMonetized"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Video Monetizat"
-            android:layout_marginBottom="12dp" />
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Save TikTok" />
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Public Tinta:" />
-
-        <RadioGroup
-            android:id="@+id/rgAudience"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12dp">
-
-            <RadioButton
-                android:id="@+id/rbGeneral"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="General"
-                android:checked="true" />
-
-            <RadioButton
-                android:id="@+id/rb18Plus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="18+"
-                android:layout_marginStart="16dp" />
-        </RadioGroup>
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rating Calitate Video:" />
-
-        <RatingBar
-            android:id="@+id/rbRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:numStars="5"
-            android:stepSize="1.0"
-            android:rating="3.0"
-            android:layout_marginBottom="12dp" />
-
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/swPublic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vizibilitate Publica"
-            android:checked="true"
-            android:layout_marginBottom="20dp" />
-
-        <Button
-            android:id="@+id/btnSaveTikTok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salveaza si Trimite" />
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

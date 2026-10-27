@@ -13,6 +13,13 @@
         android:text="Adauga TikTok (Normal)" />
 
     <Button
+        android:id="@+id/btnViewList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Vezi Lista TikToks" />
+
+    <Button
         android:id="@+id/btnOpenAiDesign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

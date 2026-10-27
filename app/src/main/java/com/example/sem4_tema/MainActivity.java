@@ -10,38 +10,43 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-
+    private ArrayList<TikTok> tiktokList = new ArrayList<>();
     private TextView tvDisplayResult;
-
-    private final ActivityResultLauncher<Intent> addLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+    private ActivityResultLauncher<Intent> addActivityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
-                    Bundle bundle = result.getData().getExtras();
-                    if (bundle != null) {
-                        ActivityNoua tikTok = bundle.getParcelable("TIKTOK_OBJECT");
-                        if (tikTok != null) {
-                            // Display via Toast
-                            Toast.makeText(this, "Obiect adaugat cu succes!", Toast.LENGTH_SHORT).show();
+                    TikTok receivedTikTok = result.getData().getParcelableExtra("NEW_TIKTOK");
 
-                            // Display via TextView
-                            tvDisplayResult.setText(tikTok.toString());
-                        }
+                    if (receivedTikTok != null) {
+                        tiktokList.add(receivedTikTok);
+                        Toast.makeText(this, "TikTok added! Total in list: " + tiktokList.size(), Toast.LENGTH_SHORT).show();
+                        tvDisplayResult.setText(receivedTikTok.toString());
                     }
                 }
-            });
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button btnAdd = findViewById(R.id.btnAddTikTok);
+        Button btnAddTikTok = findViewById(R.id.btnAddTikTok);
         tvDisplayResult = findViewById(R.id.tvDisplayResult);
 
-        btnAdd.setOnClickListener(v -> {
+        btnAddTikTok.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, ActivityNoua.class);
-            addLauncher.launch(intent);
+            addActivityLauncher.launch(intent);
+        });
+        Button btnViewList = findViewById(R.id.btnViewList);
+
+        btnViewList.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, ActivityLista.class);
+            intent.putParcelableArrayListExtra("object_list", tiktokList);
+            startActivity(intent);
         });
     }
 }

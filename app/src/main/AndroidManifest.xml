@@ -29,6 +29,11 @@
             android:name=".ActivityAiDesign"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ActivityLista"
+            android:exported="false" />
+
     </application>
 
 </manifest>
